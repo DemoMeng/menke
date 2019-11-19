@@ -1,0 +1,154 @@
+${cfg.properties.include}"/admin/layout/page_save.ftl"/>
+<form id="data-form" class="form-horizontal" role="form" callfn="refreshTable"
+      action="<@global.api '#if($package.ModuleName)${package.ModuleName.replace(".","/")}#end/${table.entityPath}/'+param.id!''/>">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+        <h4 class="modal-title">${cfg.properties.saveTitle}</h4>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-body">
+                    #foreach($field in ${cfg.genTableFieldList})
+    #if(${field.savable})
+                         <div class="form-group">
+                            #if($field.showType == 1) ## text
+                                <label class="control-label col-md-3">#if("$!field.label" != "")${field.label}#end
+        #if($!field.nullable)<span class="required"> * </span>#end
+                                </label>
+                                <div class="col-md-5">
+                                    <div class="input-icon right">
+                                        <i class="fa"></i>
+                                        <input type="text" class="form-control" name="${field.propertyName}"
+                                        placeholder="请输入#if("$!field.label" != "")${field.label}#end"/>
+                                    </div>
+                                </div>
+                            #elseif($field.showType == 2)  ## hidden
+                                <input type="hidden" class="form-control" name="${field.propertyName}"/>
+                            #elseif($field.showType == 3) ## textarea
+
+                                <label class="control-label col-md-3">#if("$!field.label" != "")${field.label}#end
+        #if($!field.nullable)<span class="required"> * </span>#end
+                                </label>
+                                <div class="col-md-5">
+                                    <div class="input-icon right">
+                                        <i class="fa"></i>
+                                        <textarea class="form-control" rows="3" placeholder="请输入#if(
+            "$!field.label" != "")${field.label}#end"
+                                         name="${field.propertyName}"></textarea>
+                                        </div>
+                                </div>
+                            #elseif($field.showType == 4) ##radio
+                                <label class="control-label col-md-3">#if("$!field.label" != "")${field.label}#end
+        #if($!field.nullable)<span class="required"> * </span>#end
+                                </label>
+                                <div class="col-md-5">
+                                    <div class="input-icon right">
+                                        <i class="fa"></i>
+                                        <div class="mt-radio-inline" data-url="sys/dict/type/${field.dictType}" data-name="${field.propertyName}"></div>
+                                        </div>
+                                </div>
+                            #elseif($field.showType == 5) ## checkbox
+
+                                <label class="control-label col-md-3">#if("$!field.label" != "")${field.label}#end
+        #if($!field.nullable)<span class="required"> * </span>#end
+                                </label>
+                                <div class="col-md-5">
+                                    <div class="input-icon right">
+                                        <i class="fa"></i>
+                                        <div class="mt-checkbox-inline" data-url="sys/dict/type/${field.dictType}"
+                                     data-name="${field.propertyName}"></div>
+                                        </div>
+                                </div>
+                            #elseif($field.showType == 6) ## select
+
+                                <label class="control-label col-md-3">#if("$!field.label" != "")${field.label}#end
+        #if($!field.nullable)<span class="required"> * </span>#end
+                                </label>
+                                <div class="col-md-5">
+                                    <div class="input-icon right">
+                                        <i class="fa"></i>
+
+                                        <select class="form-control select2" name="${field.propertyName}"
+                                        data-url="sys/dict/type/${field.dictType}"></select>
+                                        </div>
+                                </div>
+                            #elseif($field.showType == 7) ## longtext
+
+                                <label class="control-label col-md-3">#if("$!field.label" != "")${field.label}#end
+        #if($!field.nullable)<span class="required"> * </span>#end
+                                </label>
+                                <div class="col-md-5">
+                                    <div class="input-icon right">
+                                        <i class="fa"></i>
+                                        <div class="summernote" data-type="rich" name="${field.propertyName}"
+                                             data-target="${field.propertyName}"></div>
+                                        <input type="hidden" id="${field.propertyName}" name="${field.propertyName}"/>
+                                        </div>
+                                </div>
+                            #elseif($field.showType == 8) ## date
+
+                                <label class="control-label col-md-3">#if("$!field.label" != "")${field.label}#end
+        #if($!field.nullable)<span class="required"> * </span>#end
+                                </label>
+                                <div class="col-md-5">
+                                    <div class="input-icon right">
+                                        <i class="fa"></i>
+                                        <input type="text" class="form-control datepicker" name="${field.propertyName}"
+                                        placeholder="请输入#if("$!field.label" != "")${field.label}#end"/>
+                                        </div>
+                                </div>
+                            #elseif($field.showType == 9) ## autocomplete
+                                <label class="control-label col-md-3">#if("$!field.label" != "")${field.label}#end
+        #if($!field.nullable)<span class="required"> * </span>#end
+                                </label>
+                                <div class="col-md-5">
+                                    <div class="input-icon right">
+                                        <i class="fa"></i>
+                                         <input name="auto" class="form-control typeahead" type="text"
+                                               data-provide="typeahead" placeholder="请输入#if("$!field.label" != "")${field.label}#end" autocomplete="off"
+                                               data-url="sys/dict/auto/${field.dictType}" data-target-id="${field.propertyName}">
+                                        <input type="hidden" name="${field.propertyName}" id="${field.propertyName}">
+                                        </div>
+                                </div>
+                            #else
+    #end
+                            </div>
+                        #end
+#end
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn default" data-dismiss="modal">关闭</button>
+        <button type="submit" class="btn blue">保存</button>
+    </div>
+</form>
+
+<script type="text/javascript">
+    FrameworkComponent.loadFormComponent();
+    var id = "${cfg.properties.saveId}";
+    $(function () {
+        loadData();
+        $('#data-form').validate({
+            rules: {
+#foreach($field in ${cfg.genTableFieldList})
+    #if($!field.nullable && $field.showType != 2)
+        ${field.propertyName}:"required"#if($velocityCount != $table.fields.size()), #end
+    #end
+#end
+            }
+        });
+    });
+    function loadData() {
+        var method = "";
+        if (id != "") {
+            $('#data-form').beeForm("/#if(${package.ModuleName})${package.ModuleName.replace(".","/")}#end/${table.entityPath}/" + id);
+            method = "PUT";
+        } else {
+            method = "POST";
+        }
+        $('#data-form').attr("method", method);
+    }
+</script>

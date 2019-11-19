@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.framework.core.modules.gen.mapper.GenTableMapper">
+
+    <select id="findTableList" resultType="com.framework.core.modules.gen.po.GenTableInfo">
+        SELECT t.table_name as `name`,t.TABLE_COMMENT AS comment
+        FROM information_schema.`TABLES` t
+        WHERE t.TABLE_SCHEMA = (select database())
+        <if test="name != null and name != ''">
+            AND t.TABLE_NAME = (#{name})
+        </if>
+        ORDER BY t.TABLE_NAME
+    </select>
+
+</mapper>
