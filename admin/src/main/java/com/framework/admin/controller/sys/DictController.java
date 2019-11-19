@@ -44,6 +44,7 @@ public class DictController extends GenericController<Dict,Integer> {
     }
 
     @GetMapping(value = "/type/{type}")
+    @PreAuthorize("hasAuthority('sys:dict')")
     public List<IdText<String>> typeList(@PathVariable String type) {
         Map<String, Object> param = new HashMap<>();
         param.put("type", type);
@@ -56,6 +57,7 @@ public class DictController extends GenericController<Dict,Integer> {
      * @param text 匹配字段
      */
     @GetMapping(value = "/auto/{type}")
+    @PreAuthorize("hasAuthority('sys:dict')")
     public List<IdText<String>> typeAuto(@PathVariable String type, String text) {
         EntityWrapper<Dict> ew = new EntityWrapper<>();
         ew.and("type={0}", type).and("label like CONCAT('%', {0}, '%')", text);
@@ -64,6 +66,7 @@ public class DictController extends GenericController<Dict,Integer> {
 
 
     @GetMapping(value = "/type/{type}/{value}")
+    @PreAuthorize("hasAuthority('sys:dict')")
     public String getLabel(@PathVariable String type, @PathVariable String value) {
 
         EntityWrapper<Dict> ew = new EntityWrapper<>();
@@ -79,6 +82,7 @@ public class DictController extends GenericController<Dict,Integer> {
     }
 
     @GetMapping(value = "/other/{type}")
+    @PreAuthorize("hasAuthority('sys:dict')")
     public List<IdText> other(@PathVariable String type) {
         switch (type) {
             case "role":

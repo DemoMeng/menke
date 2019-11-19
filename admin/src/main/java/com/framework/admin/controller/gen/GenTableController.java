@@ -8,6 +8,7 @@ import com.framework.core.modules.gen.service.GenTableFieldService;
 import com.framework.core.modules.gen.service.GenTableService;
 import com.google.common.collect.ImmutableMap;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -22,6 +23,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("gen/table")
+@PreAuthorize("hasAuthority('sys:gen')")
 public class GenTableController extends GenericController<GenTable, Integer> {
 
     @Autowired
@@ -38,11 +40,13 @@ public class GenTableController extends GenericController<GenTable, Integer> {
      * 查询列表,并返回查询结果
      */
     @GetMapping(value = "info")
+    @PreAuthorize("hasAuthority('sys:gen')")
     public Map<String, Object> list() {
         return getService().info();
     }
 
     @PutMapping("save")
+    @PreAuthorize("hasAuthority('sys:gen')")
     public ResponseMessage save(GenTable po) {
         getService().save(po);
 
@@ -50,6 +54,7 @@ public class GenTableController extends GenericController<GenTable, Integer> {
     }
 
     @PostMapping("generator")
+    @PreAuthorize("hasAuthority('sys:gen')")
     public ResponseMessage generator(String genTableId) {
         GenTable genTable = getService().selectById(genTableId);
         genTable.setGenTableFieldList(genTableFieldService.selectByMap(ImmutableMap.of("table_name", genTable.getName())));

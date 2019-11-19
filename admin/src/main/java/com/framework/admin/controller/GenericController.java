@@ -78,7 +78,7 @@ public abstract class GenericController<PO,PK extends Serializable> {
     /**
      * 查询列表,并返回查询结果
      */
-    @PostMapping(value = "page")
+    @PostMapping(value = "/page")
     @PreAuthorize("hasAuthority('view')")
     public DataTablesPo<PO> page(PO po) {
         Page<PO> page = getService().selectPage( getPage(), new EntityWrapper<>(po));
