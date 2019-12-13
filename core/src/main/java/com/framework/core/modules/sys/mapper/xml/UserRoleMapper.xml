@@ -9,7 +9,7 @@
 	</resultMap>
 
 
-	<select id="getRoleIdsByUserId" resultType="String" parameterType="Integer">
+	<select id="getRoleIdsByUserId" resultType="java.lang.String" parameterType="java.lang.Integer">
 		select role_id from sys_user_role where user_id =#{userId};
 	</select>
 </mapper>

@@ -23,7 +23,7 @@ public class ClassUtils {
 
 
     public static void main(String[] args) throws Exception {
-        List<Class> classes = ClassUtils.getAllClassByInterface(Class.forName("com.threeti.dao.base.IGenericDao"));
+        List<Class> classes = ClassUtils.getAllClassByInterface(Class.forName("com.framework.admin.RestControllerExceptionTranslator"));
         for (Class clas : classes) {
             System.out.println(clas.getName());
         }

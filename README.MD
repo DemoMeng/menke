@@ -1,7 +1,7 @@
-#framework
+#menke
 
 
-## 技术选型
+## 技术about
     ● 核心框架：Spring Boot 1.5.1.RELEASE
     ● 安全框架：Spring Security
     ● 任务调度：Spring + Quartz
@@ -12,31 +12,6 @@
     ● 日志管理：logback
     ● 前端框架：Bootstrap + Jquery
     
-## 项目启动
-1. 创建数据库 framework
-2. 命令行启动
-
-```bash
-mvn clean install
-cd admin
-mvn spring-boot:run
-```
-浏览器打开 localhost:8080 用户名密码：admin/123123
-
-
-> 项目属于学习项目，希望多交流，如果有兴趣的朋友可以进群： 579585475
-
-> 鸣谢 [hsweb](http://www.hsweb.me/)，[mybatis-plus](http://mp.baomidou.com/#/)
-
-# 后续功能
-* 集成activity
-* 丰富表单插件封装
-* 完善代码生成
-* 增加报表统计
-
-
-# 历史记录
-
 ## 2017年04月24日
 * 【功能】升级到2.0，由于改动比较大，重新建立数据库，老项目要进行比对在进行升级
 * 【功能】添加通用面包屑导航
@@ -46,21 +21,4 @@ mvn spring-boot:run
 
 ## 2017年04月10日
 * 【功能】菜单图标选择,添加 [simple-line-icons](http://graphicburger.com/simple-line-icons-webfont/) (个人觉得这个更好看)
-* 【功能】添加统一面包屑导航
-* 【优化】升级spring-boot版本到1.5.2.RELEASE
-
-## 2017年03月23日
-* 【功能】新增druid监控 启动成功后浏览  http://localhost:8080/druid/index.html 用户名密码admin/123123
-* 【功能】增加全局新增初始化
-
-## 2017年03月21日
-
-* 【功能】新增异常管理，异步保存异常信息
-* 【bug】修复首次进入菜单页面不加载
-
-## 2017年03月20日
-
-* 【bug】修复管理员更新用户，密码清空的bug
-* 【功能】DataTables-columns新增className（设置列表样式），dict属性（关联dict表，自动将key值转换成value）
-* 【优化】重构pom文件，尽量统一引用spring-boot-dependence
-* 【todo】对不常更新的表添加缓存，比如权限，菜单等等
+* 【功能】添加统一面包
